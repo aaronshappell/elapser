@@ -1,0 +1,21 @@
+Install normally
+Have a default output directory (e.g. Documents/Elapser Timelapses/)
+
+Elapser Timelapses/
+    example capture/ (Default to the current date and time but have input box to give a name)
+        images/
+            Create timelape images here (image1, image2, ...etc)
+        timelapse.info
+            Points to the image folder and the latest image that was created
+            The rate that images were taken (For resuming)
+            For resuming a timelapse
+            For export information
+        example capture.mp4
+            Exported video of the capture
+
+linux
+    import -window root image.jpg
+mac
+    screencapture -x image.jpg
+windows
+    nircmdc.exe savescreenshot image.jpg
