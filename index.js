@@ -20,11 +20,6 @@ var createWindow = function(){
 	mainWindow.on("ready-to-show", function(){
 		mainWindow.show();
 	});
-	screenshot(path.join(process.env.HOME, "Documents", "Elapser Timelapses", "test", "images", "test.jpg"), function(error){
-		if(error){
-			console.log(error);
-		}
-	});
 }
 
 app.on("ready", createWindow);
@@ -47,6 +42,15 @@ ipcMain.on("maximize", function(){
 });
 ipcMain.on("close", function(){
 	mainWindow.close();
+});
+
+ipcMain.on("screenshot", function(event, imagePath){
+	screenshot(imagePath, function(error){
+		if(error){
+			console.log(error);
+			event.sender.send("screenshotError", error);
+		}
+	});
 });
 
 var screenshot = function(imagePath, callback){
