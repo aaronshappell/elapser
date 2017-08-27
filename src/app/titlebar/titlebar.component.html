@@ -1,0 +1,18 @@
+<md-toolbar class="draggable" color="primary">
+	Elasper
+	<span class="spacer"></span>
+	<button md-icon-button class="non-draggable" [mdMenuTriggerFor]="menu" style="margin-left: 15px"><md-icon>more_vert</md-icon></button>
+	<button md-icon-button class="non-draggable" (click)="minimize()"><md-icon>remove</md-icon></button>
+	<button md-icon-button class="non-draggable" (click)="maximize()"><md-icon>check_box_outline_blank</md-icon></button>
+	<button md-icon-button class="non-draggable" (click)="close()"><md-icon>close</md-icon></button>
+	<md-menu #menu="mdMenu">
+		<button md-menu-item (click)="openSettingsDialog()">
+			<md-icon>settings</md-icon>
+			Settings
+		</button>
+		<button md-menu-item (click)="openAboutDialog()">
+			<md-icon>help</md-icon>
+			About
+		</button>
+	</md-menu>
+</md-toolbar>
