@@ -10,10 +10,16 @@ import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 	styleUrls: ['./titlebar.component.css']
 })
 export class TitlebarComponent implements OnInit {
+	private framelessControls: boolean;
 
 	constructor(private dialog: MdDialog) { }
 
 	ngOnInit() {
+		if(process.platform === "darwin"){
+			this.framelessControls = false;
+		} else{
+			this.framelessControls = true;
+		}
 	}
 
 	openSettingsDialog(){

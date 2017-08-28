@@ -7,7 +7,17 @@ var childProcess = require("child_process");
 let mainWindow;
 
 var createWindow = function(){
-	mainWindow = new BrowserWindow({width: 800, height: 600, show: false, frame: false});
+	var windowOptions = {
+		width: 800,
+		height: 600,
+		show: false
+	};
+	if(process.platform === "darwin"){
+		windowOptions.titleBarStyle = "hidden";
+	} else{
+		windowOptions.frame = false;
+	}
+	mainWindow = new BrowserWindow(windowOptions);
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, "dist", "index.html"),
 		protocol: "file:",
