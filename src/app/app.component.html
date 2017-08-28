@@ -1,1 +1,8 @@
 <app-titlebar></app-titlebar>
+<md-input-container>
+    <input mdInput #nameInput placeholder="Timelapse Name">
+</md-input-container>
+<button md-raised-button *ngIf="!screenshotService.recording; else stopButton" (click)="screenshotService.start(nameInput.value, 0, 1000)">Start</button>
+<ng-template #stopButton>
+    <button md-raised-button (click)="screenshotService.stop()">Stop</button>
+</ng-template>

@@ -1,6 +1,8 @@
 Install normally
 Have a default output directory (e.g. Documents/Elapser Timelapses/)
 
+Add option to choose between png or jpg
+
 Elapser Timelapses/
     example capture/ (Default to the current date and time but have input box to give a name)
         images/
