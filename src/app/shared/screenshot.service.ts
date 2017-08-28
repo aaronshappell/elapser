@@ -5,6 +5,7 @@ import * as path from "path";
 @Injectable()
 export class ScreenshotService {
 	private saveLocation: string = path.join(process.env.HOME, "Documents", "Elapser Timelapses");
+	private imageType: string = "jpg";
 	private recording: boolean = false;
 	private intervalID: number;
 	private currentImageIndex: number = 0;
@@ -17,7 +18,7 @@ export class ScreenshotService {
 	}
 
 	private screenshot(timelapseName: string){
-		ipcRenderer.send("screenshot", path.join(this.saveLocation, timelapseName, "images", `image${this.currentImageIndex}.jpg`));
+		ipcRenderer.send("screenshot", path.join(this.saveLocation, timelapseName, "images", `image${this.currentImageIndex}.${this.imageType}`));
 		this.currentImageIndex++;
 	}
 
@@ -35,7 +36,15 @@ export class ScreenshotService {
 		clearInterval(this.intervalID);
 	}
 
+	isRecording(){
+		return this.recording;
+	}
+
 	setSaveLocation(saveLocation: string){
 		this.saveLocation = saveLocation;
+	}
+
+	setImageType(imageType: string){
+		this.imageType = imageType;
 	}
 }

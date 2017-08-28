@@ -8,7 +8,7 @@ const {dialog} = require("electron").remote;
 	styleUrls: ['./settings-dialog.component.css']
 })
 export class SettingsDialogComponent implements OnInit {
-	private selectedImageType = "jpg";
+	private selectedImageType: string = "jpg";
 	private imageTypes = [
 		{value: "jpg", viewValue: "JPG"},
 		{value: "png", viewValue: "PNG"}
@@ -17,6 +17,10 @@ export class SettingsDialogComponent implements OnInit {
 	constructor(private screenshotService: ScreenshotService) {}
 
 	ngOnInit() {
+	}
+
+	changeImageType(){
+		this.screenshotService.setImageType(this.selectedImageType);
 	}
 
 	browseForSaveLocation(){

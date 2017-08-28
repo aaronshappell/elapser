@@ -4,7 +4,7 @@
 	</md-input-container>
 	<button md-raised-button (click)="browseForSaveLocation()">Browse</button>
 </div>
-<md-select placeholder="Image Type" [(ngModel)]="selectedImageType">
+<md-select placeholder="Image Type" [(ngModel)]="selectedImageType" (change)="changeImageType()">
 	<md-option *ngFor="let imageType of imageTypes" [value]="imageType.value">
 		{{imageType.viewValue}}
 	</md-option>
