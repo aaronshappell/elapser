@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ScreenshotService} from "../shared/screenshot.service";
 const {dialog} = require("electron").remote;
+import {Settings} from "../shared/settings.model";
 
 @Component({
 	selector: 'app-settings-dialog',
@@ -8,7 +9,7 @@ const {dialog} = require("electron").remote;
 	styleUrls: ['./settings-dialog.component.css']
 })
 export class SettingsDialogComponent implements OnInit {
-	private selectedImageType: string = "jpg";
+	private settings: Settings;
 	private imageTypes = [
 		{value: "jpg", viewValue: "JPG"},
 		{value: "png", viewValue: "PNG"}
@@ -17,19 +18,19 @@ export class SettingsDialogComponent implements OnInit {
 	constructor(private screenshotService: ScreenshotService) {}
 
 	ngOnInit() {
-	}
-
-	changeImageType(){
-		this.screenshotService.setImageType(this.selectedImageType);
+		this.settings = this.screenshotService.getSettings();
 	}
 
 	browseForSaveLocation(){
-		dialog.showOpenDialog({properties: ["openDirectory", "createDirectory"]}, this.setSaveLocation.bind(this));
+		dialog.showOpenDialog({properties: ["openDirectory", "createDirectory"]}, (filePaths: String[]) => {
+			if(filePaths){
+				this.settings.saveLocation = filePaths[0].toString();
+				this.updateSettings();
+			}
+		});
 	}
 
-	private setSaveLocation(filePaths: String[]){
-		if(filePaths){
-			this.screenshotService.setSaveLocation(filePaths[0].toString());
-		}
+	updateSettings(){
+		this.screenshotService.setSettings(this.settings);
 	}
 }

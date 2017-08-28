@@ -1,11 +1,14 @@
-<div>
-	<md-input-container>
-		<input mdInput placeholder="Save Location">
-	</md-input-container>
-	<button md-raised-button (click)="browseForSaveLocation()">Browse</button>
-</div>
-<md-select placeholder="Image Type" [(ngModel)]="selectedImageType" (change)="changeImageType()">
-	<md-option *ngFor="let imageType of imageTypes" [value]="imageType.value">
-		{{imageType.viewValue}}
-	</md-option>
-</md-select>
+<h2 md-dialog-title>Settings</h2>
+<md-dialog-content>
+	<div>
+		<md-input-container>
+			<input mdInput placeholder="Save Location" [(ngModel)]="settings.saveLocation" (change)="updateSettings()">
+		</md-input-container>
+		<button md-raised-button (click)="browseForSaveLocation()">Browse</button>
+	</div>
+	<md-select placeholder="Image Type" [(ngModel)]="settings.imageType" (change)="updateSettings()">
+		<md-option *ngFor="let imageType of imageTypes" [value]="imageType.value">
+			{{imageType.viewValue}}
+		</md-option>
+	</md-select>
+</md-dialog-content>

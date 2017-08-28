@@ -1,24 +1,39 @@
 import { Injectable } from '@angular/core';
 import {ipcRenderer} from "electron";
+import {Settings} from "./settings.model";
 import * as path from "path";
+import * as fs from "fs";
 
 @Injectable()
 export class ScreenshotService {
-	private saveLocation: string = path.join(process.env.HOME, "Documents", "Elapser Timelapses");
-	private imageType: string = "jpg";
 	private recording: boolean = false;
 	private intervalID: number;
 	private currentImageIndex: number = 0;
 	private speed: number;
+	private settings: Settings;
+	private defaultSettings = new Settings(path.join(process.env.HOME, "Documents", "Elasper Timelapses"), "jpg");
 
 	constructor(){
 		ipcRenderer.on("screenshotError", function(event, error){
 			console.log(error);
 		});
+		fs.readFile(path.join(".", "settings.json"), "utf8", (err, data) => {
+			if(err){
+				if(err.code === "ENOENT"){
+					fs.writeFile(path.join(".", "settings.json"), JSON.stringify(this.defaultSettings), "utf8", function(err){
+						if(err) throw err;
+					});
+				} else{
+					throw err;
+				}
+			} else{
+				this.settings = JSON.parse(data);
+			}
+		});
 	}
 
 	private screenshot(timelapseName: string){
-		ipcRenderer.send("screenshot", path.join(this.saveLocation, timelapseName, "images", `image${this.currentImageIndex}.${this.imageType}`));
+		ipcRenderer.send("screenshot", path.join(this.settings.saveLocation, timelapseName, "images", `image${this.currentImageIndex}.${this.settings.imageType}`));
 		this.currentImageIndex++;
 	}
 
@@ -40,11 +55,14 @@ export class ScreenshotService {
 		return this.recording;
 	}
 
-	setSaveLocation(saveLocation: string){
-		this.saveLocation = saveLocation;
+	getSettings(){
+		return this.settings;
 	}
 
-	setImageType(imageType: string){
-		this.imageType = imageType;
+	setSettings(settings: Settings){
+		this.settings = settings;
+		fs.writeFile(path.join(".", "settings.json"), JSON.stringify(this.settings), "utf8", function(err){
+			if(err) throw err;
+		});
 	}
 }
