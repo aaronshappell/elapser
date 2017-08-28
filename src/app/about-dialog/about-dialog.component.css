@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.icon-align {
+    display: flex;
+    align-items: center;
+}
+
+.heart {
+    color: red;
+}
+
+md-icon {
+    padding: 5px;
+}
