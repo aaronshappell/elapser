@@ -5,11 +5,15 @@ import {MdDialogModule, MdMenuModule, MdToolbarModule, MdIconModule, MdButtonMod
 
 import { AppComponent } from './app.component';
 import { TitlebarComponent } from './titlebar/titlebar.component';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		TitlebarComponent
+		TitlebarComponent,
+		AboutDialogComponent,
+		SettingsDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -21,6 +25,7 @@ import { TitlebarComponent } from './titlebar/titlebar.component';
 		MdButtonModule
 	],
 	providers: [],
+	entryComponents: [SettingsDialogComponent, AboutDialogComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
