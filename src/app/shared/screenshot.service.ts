@@ -10,7 +10,9 @@ export class ScreenshotService {
 	private recording: boolean = false;
 	private intervalID: number;
 	private currentImageIndex: number = 0;
+	private startTime: number;
 	private speed: number;
+	private timelapseName: string;
 	private settings: Settings;
 	private defaultSettings = new Settings(path.join(process.env.HOME, "Documents", "Elasper Timelapses"), "jpg");
 
@@ -19,6 +21,12 @@ export class ScreenshotService {
 			console.log(error);
 			this.snackBar.open("Error taking screenshot, recording stopped", "", {duration: 2000});
 			this.stop();
+		});
+		ipcRenderer.on("exportVideoError", (event, error) => {
+			this.snackBar.open("Error during export", "", {duration: 2000});
+		});
+		ipcRenderer.on("exportVideoFinished", () => {
+			this.snackBar.open("Export finished!", "", {duration: 2000}); //Add open action
 		});
 		fs.readFile(path.join(".", "settings.json"), "utf8", (err, data) => {
 			if(err){
@@ -42,8 +50,8 @@ export class ScreenshotService {
 		});
 	}
 
-	private screenshot(timelapseName: string){
-		ipcRenderer.send("screenshot", path.join(this.settings.saveLocation, timelapseName, "images", `image${this.currentImageIndex}.${this.settings.imageType}`));
+	private screenshot(){
+		ipcRenderer.send("screenshot", path.join(this.settings.saveLocation, this.timelapseName, "images", `image${this.currentImageIndex}.${this.settings.imageType}`));
 		this.currentImageIndex++;
 	}
 
@@ -51,8 +59,10 @@ export class ScreenshotService {
 		if(!this.recording){
 			this.recording = true;
 			this.currentImageIndex = startIndex;
+			this.startTime = Date.now();
 			this.speed = speed;
-			this.intervalID = setInterval(this.screenshot.bind(this), this.speed, timelapseName);
+			this.timelapseName = timelapseName;
+			this.intervalID = setInterval(this.screenshot.bind(this), this.speed);
 		}
 	}
 
@@ -61,8 +71,16 @@ export class ScreenshotService {
 		clearInterval(this.intervalID);
 	}
 
+	exportVideo(){
+		ipcRenderer.send("exportVideo", this.settings, this.timelapseName);
+	}
+
 	isRecording(){
 		return this.recording;
+	}
+
+	getTime(){
+		return Date.now() - this.startTime;
 	}
 
 	getSettings(){

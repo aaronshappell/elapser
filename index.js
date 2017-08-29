@@ -3,8 +3,11 @@ var fs = require("fs");
 const path = require("path");
 const url = require("url");
 var childProcess = require("child_process");
+const ffmpeg = require("fluent-ffmpeg");
 
 let mainWindow;
+
+var ffmpegPath = `bin/${process.platform}/${process.arch}/ffmpeg` + ((process.platform === "win32") ? ".exe" : "");
 
 var createWindow = function(){
 	var windowOptions = {
@@ -52,6 +55,23 @@ ipcMain.on("maximize", function(){
 });
 ipcMain.on("close", function(){
 	mainWindow.close();
+});
+
+ipcMain.on("exportVideo", function(event, settings, timelapseName){
+	var proc = new ffmpeg(`${settings.saveLocation}/${timelapseName}/images/image%d.${settings.imageType}`)
+		.setFfmpegPath(ffmpegPath)
+		.videoCodec('libx264')
+		.inputFps(0.5) //This changes the time that each image is displayed
+		.outputFps(60)
+		.on("error", (error) => {
+			console.log(error);
+			event.sender.send("exportVideoError", error);
+		})
+		.on("end", () => {
+			console.log("Export finished");
+			event.sender.send("exportVideoFinished");
+		})
+		.save(`${settings.saveLocation}/${timelapseName}/${timelapseName}.mp4`);
 });
 
 ipcMain.on("screenshot", function(event, imagePath){
