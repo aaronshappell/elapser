@@ -9,7 +9,7 @@ import {ScreenshotService} from "./shared/screenshot.service";
 export class AppComponent {
 	private disableExportButton: boolean = true;
 
-	constructor(private screenshotService: ScreenshotService, public snackBar: MdSnackBar){}
+	constructor(private screenshotService: ScreenshotService){}
 
 	start(nameInput: string){
 		this.disableExportButton = true;
