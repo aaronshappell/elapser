@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms"
-import {MdDialogModule, MdMenuModule, MdToolbarModule, MdIconModule, MdButtonModule, MdInputModule, MdSelectModule} from "@angular/material";
+import {MdDialogModule, MdMenuModule, MdToolbarModule, MdIconModule, MdButtonModule, MdInputModule, MdSelectModule, MdSnackBarModule} from "@angular/material";
 
 import {ScreenshotService} from "./shared/screenshot.service";
 
@@ -28,7 +28,8 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 		MdIconModule,
 		MdButtonModule,
 		MdInputModule,
-		MdSelectModule
+		MdSelectModule,
+		MdSnackBarModule
 	],
 	providers: [ScreenshotService],
 	entryComponents: [SettingsDialogComponent, AboutDialogComponent],
