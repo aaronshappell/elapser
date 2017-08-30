@@ -13,12 +13,12 @@ export class AppComponent {
 
 	start(nameInput: string){
 		this.disableExportButton = true;
-		this.screenshotService.start(nameInput, 0, 1000)
+		this.screenshotService.start(nameInput, 0, 1000);
 	}
 
 	stop(){
 		this.disableExportButton = false;
-		this.screenshotService.stop()
+		this.screenshotService.stop();
 	}
 
 	exportVideo(){

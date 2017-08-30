@@ -57,11 +57,11 @@ ipcMain.on("close", function(){
 	mainWindow.close();
 });
 
-ipcMain.on("exportVideo", function(event, settings, timelapseName){
-	var proc = new ffmpeg(`${settings.saveLocation}/${timelapseName}/images/image%d.${settings.imageType}`)
+ipcMain.on("exportVideo", function(event, settings, info){
+	var proc = new ffmpeg(`${settings.saveLocation}/${info.name}/images/image%d.${settings.imageType}`)
 		.setFfmpegPath(ffmpegPath)
 		.videoCodec('libx264')
-		.inputFps(0.5) //This changes the time that each image is displayed
+		.inputFps(10) //This changes the time that each image is displayed
 		.outputFps(60)
 		.on("error", (error) => {
 			console.log(error);
@@ -71,7 +71,7 @@ ipcMain.on("exportVideo", function(event, settings, timelapseName){
 			console.log("Export finished");
 			event.sender.send("exportVideoFinished");
 		})
-		.save(`${settings.saveLocation}/${timelapseName}/${timelapseName}.mp4`);
+		.save(`${settings.saveLocation}/${info.name}/${info.name}.mp4`);
 });
 
 ipcMain.on("screenshot", function(event, imagePath){
