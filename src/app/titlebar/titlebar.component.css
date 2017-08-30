@@ -1,0 +1,10 @@
+.frameless-controls {
+    display: flex;
+    align-items: center;
+}
+
+.divider {
+    height: 30px;
+    margin: 5px;
+    border-left: thin solid rgba(255, 255, 255, 0.3);
+}
