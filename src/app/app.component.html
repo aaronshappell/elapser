@@ -6,4 +6,7 @@
 <ng-template #stopButton>
     <button md-raised-button (click)="stop()">Stop</button>
 </ng-template>
-<button md-raised-button (click)="exportVideo()" [disabled]="disableExportButton">Export Video</button>
+<div class="export">
+    <button md-raised-button (click)="exportVideo()" [disabled]="disableExportButton">Export Video</button>
+    <md-progress-bar *ngIf="exporting" color="primary" mode="determinate" [value]="exportProgress"></md-progress-bar>
+</div>

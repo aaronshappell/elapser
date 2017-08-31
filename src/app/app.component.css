@@ -1,0 +1,9 @@
+md-progress-bar {
+    width: 200px;
+    margin: 0px 10px;
+}
+
+.export {
+    display: flex;
+    align-items: center;
+}

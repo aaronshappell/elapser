@@ -58,11 +58,18 @@ ipcMain.on("close", function(){
 });
 
 ipcMain.on("exportVideo", function(event, settings, info){
+	var inputFps = 10; //Will become part of settings or info
+	var estimatedDuration = info.imageIndex / inputFps;
 	var proc = new ffmpeg(`${settings.saveLocation}/${info.name}/images/image%d.${settings.imageType}`)
 		.setFfmpegPath(ffmpegPath)
 		.videoCodec('libx264')
-		.inputFps(10) //This changes the time that each image is displayed
+		.inputFps(inputFps)
 		.outputFps(60)
+		.on("progress", (info) => {
+			var regex = info.timemark.match(/^(\d\d):(\d\d):(\d\d)(\.\d\d)$/);
+			var percent = (Number.parseInt(regex[1]) * 3600 + Number.parseInt(regex[2]) * 60 + Number.parseInt(regex[3]) + Number.parseFloat(regex[4])) / estimatedDuration * 100;
+			event.sender.send("exportVideoProgress", Math.floor(percent));
+		})
 		.on("error", (error) => {
 			console.log(error);
 			event.sender.send("exportVideoError", error);

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {ScreenshotService} from "./shared/screenshot.service";
+import {ipcRenderer} from "electron";
 
 @Component({
 	selector: 'app-root',
@@ -8,8 +9,25 @@ import {ScreenshotService} from "./shared/screenshot.service";
 })
 export class AppComponent {
 	private disableExportButton: boolean = true;
+	private exportProgress: number = 0;
+	private exporting: boolean = false;
 
-	constructor(private screenshotService: ScreenshotService){}
+	constructor(private cdRef: ChangeDetectorRef, private screenshotService: ScreenshotService){
+		ipcRenderer.on("exportVideoProgress", (event, progress) => {
+			this.exportProgress = progress;
+			this.cdRef.detectChanges();
+		});
+		ipcRenderer.on("exportVideoError", (event, error) => {
+			this.exportProgress = 0;
+			this.disableExportButton = false;
+			this.exporting = false;
+		});
+		ipcRenderer.on("exportVideoFinished", () => {
+			this.exportProgress = 0;
+			this.disableExportButton = false;
+			this.exporting = false;
+		});
+	}
 
 	start(nameInput: string){
 		this.disableExportButton = true;
@@ -23,6 +41,7 @@ export class AppComponent {
 
 	exportVideo(){
 		this.disableExportButton = true;
+		this.exporting = true;
 		this.screenshotService.exportVideo();
 	}
 }
