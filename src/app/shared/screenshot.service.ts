@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {MdSnackBar} from "@angular/material";
+import {MatSnackBar} from "@angular/material";
 import {ipcRenderer} from "electron";
 import {Settings} from "./settings.model";
 import {Info} from "./info.model";
@@ -15,7 +15,7 @@ export class ScreenshotService {
 	private intervalID: number;
 	private startTime: number;
 
-	constructor(public snackBar: MdSnackBar){
+	constructor(public snackBar: MatSnackBar){
 		ipcRenderer.on("screenshotError", (event, error) => {
 			console.log(error);
 			this.snackBar.open("Error taking screenshot, recording stopped", "", {duration: 2000});

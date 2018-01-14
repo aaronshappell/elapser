@@ -1,12 +1,12 @@
 <app-titlebar></app-titlebar>
-<md-input-container>
-    <input mdInput #nameInput placeholder="Timelapse Name">
-</md-input-container>
-<button md-raised-button *ngIf="!screenshotService.isRecording(); else stopButton" (click)="start(nameInput.value)">Start</button>
+<mat-form-field>
+    <input matInput #nameInput placeholder="Timelapse Name">
+</mat-form-field>
+<button mat-raised-button *ngIf="!screenshotService.isRecording(); else stopButton" (click)="start(nameInput.value)">Start</button>
 <ng-template #stopButton>
-    <button md-raised-button (click)="stop()">Stop</button>
+    <button mat-raised-button (click)="stop()">Stop</button>
 </ng-template>
 <div class="export">
-    <button md-raised-button (click)="exportVideo()" [disabled]="disableExportButton">Export Video</button>
-    <md-progress-bar *ngIf="exporting" color="primary" mode="determinate" [value]="exportProgress"></md-progress-bar>
+    <button mat-raised-button (click)="exportVideo()" [disabled]="disableExportButton">Export Video</button>
+    <mat-progress-bar *ngIf="exporting" color="primary" mode="determinate" [value]="exportProgress"></mat-progress-bar>
 </div>

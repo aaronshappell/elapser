@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms"
-import {MdDialogModule, MdMenuModule, MdToolbarModule, MdIconModule, MdButtonModule, MdInputModule, MdSelectModule, MdSnackBarModule, MdProgressBarModule} from "@angular/material";
+import {MatDialogModule, MatMenuModule, MatToolbarModule, MatIconModule, MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatProgressBarModule} from "@angular/material";
 
 import {ScreenshotService} from "./shared/screenshot.service";
 
@@ -22,15 +22,15 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
-		MdDialogModule,
-		MdMenuModule,
-		MdToolbarModule,
-		MdIconModule,
-		MdButtonModule,
-		MdInputModule,
-		MdSelectModule,
-		MdSnackBarModule,
-		MdProgressBarModule
+		MatDialogModule,
+		MatMenuModule,
+		MatToolbarModule,
+		MatIconModule,
+		MatButtonModule,
+		MatInputModule,
+		MatSelectModule,
+		MatSnackBarModule,
+		MatProgressBarModule
 	],
 	providers: [ScreenshotService],
 	entryComponents: [SettingsDialogComponent, AboutDialogComponent],

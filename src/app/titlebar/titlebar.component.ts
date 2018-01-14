@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ipcRenderer} from "electron";
-import {MdDialog, MdSidenav} from "@angular/material";
+import {MatDialog, MatSidenav} from "@angular/material";
 import {SettingsDialogComponent} from "../settings-dialog/settings-dialog.component";
 import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 
@@ -12,7 +12,7 @@ import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 export class TitlebarComponent implements OnInit {
 	private framelessControls: boolean;
 
-	constructor(private dialog: MdDialog) { }
+	constructor(private dialog: MatDialog) { }
 
 	ngOnInit() {
 		if(process.platform === "darwin"){
