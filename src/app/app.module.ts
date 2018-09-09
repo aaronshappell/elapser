@@ -1,39 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms"
-import {MatDialogModule, MatMenuModule, MatToolbarModule, MatIconModule, MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatProgressBarModule} from "@angular/material";
 
-import {ScreenshotService} from "./shared/screenshot.service";
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { TitlebarComponent } from './titlebar/titlebar.component';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
+import { SettingsComponent } from './settings/settings.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		TitlebarComponent,
-		AboutDialogComponent,
-		SettingsDialogComponent
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		FormsModule,
-		MatDialogModule,
-		MatMenuModule,
-		MatToolbarModule,
-		MatIconModule,
-		MatButtonModule,
-		MatInputModule,
-		MatSelectModule,
-		MatSnackBarModule,
-		MatProgressBarModule
-	],
-	providers: [ScreenshotService],
-	entryComponents: [SettingsDialogComponent, AboutDialogComponent],
-	bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    SettingsComponent,
+    AboutComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule
+  ],
+  providers: [],
+  entryComponents: [SettingsComponent, AboutComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

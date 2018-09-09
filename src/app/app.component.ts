@@ -1,47 +1,40 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import {ScreenshotService} from "./shared/screenshot.service";
-import {ipcRenderer} from "electron";
+import { Component } from '@angular/core';
+import { ipcRenderer } from 'electron';
+import { MatDialog } from '@angular/material';
+
+import { SettingsComponent } from './settings/settings.component';
+import { AboutComponent } from './about/about.component';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	private disableExportButton: boolean = true;
-	private exportProgress: number = 0;
-	private exporting: boolean = false;
+  framelessControls: boolean;
+  title = 'Elapser';
 
-	constructor(private cdRef: ChangeDetectorRef, private screenshotService: ScreenshotService){
-		ipcRenderer.on("exportVideoProgress", (event, progress) => {
-			this.exportProgress = progress;
-			this.cdRef.detectChanges();
-		});
-		ipcRenderer.on("exportVideoError", (event, error) => {
-			this.exportProgress = 0;
-			this.disableExportButton = false;
-			this.exporting = false;
-		});
-		ipcRenderer.on("exportVideoFinished", () => {
-			this.exportProgress = 0;
-			this.disableExportButton = false;
-			this.exporting = false;
-		});
+  constructor(public dialog: MatDialog){
+    this.framelessControls = process.platform !== "darwin";
+  }
+
+  openSettings(){
+    this.dialog.open(SettingsComponent);
+  }
+
+  openAbout(){
+    this.dialog.open(AboutComponent);
+  }
+
+  minimize(){
+		ipcRenderer.send("minimize")
 	}
 
-	start(nameInput: string){
-		this.disableExportButton = true;
-		this.screenshotService.start(nameInput, 0, 1000);
+	maximize(){
+		ipcRenderer.send("maximize");
 	}
 
-	stop(){
-		this.disableExportButton = false;
-		this.screenshotService.stop();
-	}
-
-	exportVideo(){
-		this.disableExportButton = true;
-		this.exporting = true;
-		this.screenshotService.exportVideo();
-	}
+	close(){
+		ipcRenderer.send("close");
+  }
 }
