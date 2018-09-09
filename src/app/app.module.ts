@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule } from '@angular/material';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -17,10 +16,7 @@ import { AboutComponent } from './about/about.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule
+    MaterialModule
   ],
   providers: [],
   entryComponents: [SettingsComponent, AboutComponent],
