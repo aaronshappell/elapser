@@ -28,6 +28,7 @@
     "copyright": "Copyright © 2017 Aaron Shappell",
     "files": [
       "**/*",
+      "bin/*",
       "build/elapser/*",
       "!*.ts",
       "!e2e/",

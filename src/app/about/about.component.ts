@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+  version: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.version = process.env.npm_package_version;
   }
 
 }
