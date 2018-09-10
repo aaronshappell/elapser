@@ -5,6 +5,7 @@ settings.json
 
 # compiled output
 /dist
+/build/elapser
 /tmp
 /out-tsc
 

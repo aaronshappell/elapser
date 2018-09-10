@@ -26,7 +26,7 @@ function createWindow() {
     win.setMenu(null)
 
     // and load the index.html of the app.
-    win.loadURL(`file://${__dirname}/dist/elapser/index.html`)
+    win.loadURL(`file://${__dirname}/build/elapser/index.html`)
 
     // Open the DevTools.
     win.webContents.openDevTools()

@@ -3,10 +3,7 @@
   "description": "A cross-platform timelapse application",
   "version": "0.1.0",
   "license": "MIT",
-  "author": {
-    "name": "Aaron Shappell",
-    "email": "aaronshappell@gmail.com"
-  },
+  "author": "Aaron Shappell <aaronshappell@gmail.com>",
   "homepage": "https://github.com/aaronshappell/elapser",
   "bugs": {
     "url": "https://github.com/aaronshappell/elapser/issues",
@@ -21,7 +18,35 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "electron-build": "ng build --prod && electron ."
+    "electron-build": "ng build --prod && electron .",
+    "electron-dist": "build"
+  },
+  "build": {
+    "appId": "org.aaronshappell.elapser",
+    "productName": "Elapser",
+    "copyright": "Copyright © 2018 Aaron Shappell",
+    "files": [
+      "**/*",
+      "build/elapser/*",
+      "!*.ts",
+      "!e2e/",
+      "!**/node_modules",
+      "!src/",
+      "!angular.json",
+      "!LICENSE",
+      "!package.json",
+      "!README.md",
+      "!tsconfig.json",
+      "!tslint.json",
+      "!webpack.config.js"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "private": true,
   "dependencies": {
