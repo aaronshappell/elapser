@@ -19,13 +19,13 @@
     "e2e": "ng e2e",
     "electron": "electron .",
     "electron-build": "ng build --prod && electron .",
-    "electron-dist": "build --dir -p never",
-    "publish": "build -p always"
+    "dist": "build --dir -p never",
+    "dist-publish": "build -p always"
   },
   "build": {
     "appId": "org.aaronshappell.elapser",
     "productName": "Elapser",
-    "copyright": "Copyright © 2018 Aaron Shappell",
+    "copyright": "Copyright © 2017 Aaron Shappell",
     "files": [
       "**/*",
       "build/elapser/*",
