@@ -2,8 +2,8 @@
 <mat-dialog-content>
   <mat-form-field>
     <input matInput placeholder="Save Location" [(ngModel)]="settings.saveLocation">
-    <button mat-raised-button (click)="browseSaveLocation()">Browse</button>
   </mat-form-field>
+  <button mat-raised-button (click)="browseSaveLocation()">Browse</button>
   <mat-form-field>
     <mat-select placeholder="Image Type" [(ngModel)]="settings.imageType">
       <mat-option *ngFor="let imageType of imageTypes" [value]="imageType">
