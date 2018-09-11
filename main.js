@@ -45,6 +45,8 @@ function createWindow() {
         win.show()
     })
 
+    // Check for updates
+    // TODO: notify user when there updates
     autoUpdater.checkForUpdatesAndNotify()
 }
 
