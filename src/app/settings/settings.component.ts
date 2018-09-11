@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<SettingsComponent>) { }
 
   ngOnInit() {
+  }
+
+  saveSettings(){
+    // TODO: Save settings via settings service
+    this.dialogRef.close();
   }
 
 }
