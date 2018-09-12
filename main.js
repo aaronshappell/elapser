@@ -60,18 +60,22 @@ autoUpdater.on('checking-for-update', () => {
 
 autoUpdater.on('update-available', (info) => {
     console.log("update available")
+    // TODO: notify user of update
 })
 
 autoUpdater.on('update-not-available', (info) => {
     console.log("update not available")
+    win.webContents.send("updateAvailable")
 })
 
 autoUpdater.on('download-progress', (progress) => {
     console.log("download progress: " + progress.percent + "%")
+    // TODO: notify user of download progress
 })
 
 autoUpdater.on('update-downloaded', (info) => {
     console.log("update downloaded")
+    autoUpdater.quitAndInstall();
 })
 
 // This method will be called when Electron has finished
@@ -106,4 +110,8 @@ ipcMain.on('maximize', () => {
 
 ipcMain.on('close', () => {
 	win.close()
+})
+
+ipcMain.on('downloadUpdate', () => {
+    autoUpdater.downloadUpdate()
 })

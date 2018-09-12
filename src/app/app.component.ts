@@ -12,15 +12,18 @@ import { AboutComponent } from './about/about.component';
 })
 export class AppComponent {
   framelessControls: boolean;
-  updateAvailable: boolean = false;
+  updateAvailable: boolean = true;
   title = 'Elapser';
 
   constructor(public dialog: MatDialog){
     this.framelessControls = process.platform !== "darwin";
+    ipcRenderer.on("updateAvailable", () => {
+      this.updateAvailable = true;
+    });
   }
 
   update(){
-    // TODO: download and install update
+    ipcRenderer.send("downloadUpdate");
   }
 
   openSettings(){
