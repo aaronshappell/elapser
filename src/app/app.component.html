@@ -1,6 +1,9 @@
 <mat-toolbar class="draggable" color="primary">
   {{title}}
   <span class="spacer"></span>
+  <button *ngIf="updateAvailable" mat-icon-button (click)="update()">
+    <mat-icon>save_alt</mat-icon>
+  </button>
   <button mat-icon-button (click)="openAbout()">
     <mat-icon>help</mat-icon>
   </button>

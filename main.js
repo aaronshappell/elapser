@@ -45,10 +45,34 @@ function createWindow() {
         win.show()
     })
 
-    // Check for updates
-    // TODO: notify user when there updates
-    autoUpdater.checkForUpdatesAndNotify()
+    // Configure auto updating and check for available updates
+    autoUpdater.autoDownload = false
+    autoUpdater.checkForUpdates()
 }
+
+autoUpdater.on('error', (error) => {
+    console.log(error)
+})
+
+autoUpdater.on('checking-for-update', () => {
+    console.log("checking for update")
+})
+
+autoUpdater.on('update-available', (info) => {
+    console.log("update available")
+})
+
+autoUpdater.on('update-not-available', (info) => {
+    console.log("update not available")
+})
+
+autoUpdater.on('download-progress', (progress) => {
+    console.log("download progress: " + progress.percent + "%")
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+    console.log("update downloaded")
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
