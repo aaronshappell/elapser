@@ -1,7 +1,7 @@
 {
   "name": "elapser",
   "description": "A cross-platform timelapse application",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "author": "Aaron Shappell <aaronshappell@gmail.com>",
   "homepage": "https://github.com/aaronshappell/elapser",
