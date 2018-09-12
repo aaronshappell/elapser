@@ -60,12 +60,11 @@ autoUpdater.on('checking-for-update', () => {
 
 autoUpdater.on('update-available', (info) => {
     console.log("update available")
-    // TODO: notify user of update
+    win.webContents.send("updateAvailable")
 })
 
 autoUpdater.on('update-not-available', (info) => {
     console.log("update not available")
-    win.webContents.send("updateAvailable")
 })
 
 autoUpdater.on('download-progress', (progress) => {
@@ -113,5 +112,6 @@ ipcMain.on('close', () => {
 })
 
 ipcMain.on('downloadUpdate', () => {
+    console.log("downloading update")
     autoUpdater.downloadUpdate()
 })
