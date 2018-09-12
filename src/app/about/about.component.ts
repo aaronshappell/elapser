@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { remote } from 'electron';
 
 @Component({
   selector: 'app-about',
@@ -11,7 +12,7 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.version = process.env.npm_package_version;
+    this.version = remote.app.getVersion();
   }
 
 }
