@@ -50,6 +50,7 @@ function createWindow() {
     autoUpdater.checkForUpdates()
 }
 
+// Auto updater event callbacks
 autoUpdater.on('error', (error) => {
     console.log(error)
 })
@@ -74,7 +75,7 @@ autoUpdater.on('download-progress', (progress) => {
 
 autoUpdater.on('update-downloaded', (info) => {
     console.log("update downloaded")
-    autoUpdater.quitAndInstall();
+    autoUpdater.quitAndInstall(true, true);
 })
 
 // This method will be called when Electron has finished
@@ -99,6 +100,7 @@ app.on('activate', () => {
     }
 })
 
+// ipc event callbacks
 ipcMain.on('minimize', () => {
     win.minimize()
 })
