@@ -1,5 +1,28 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
 const {autoUpdater} = require('electron-updater')
+const ffmpeg = require('fluent-ffmpeg')
+const ffmpegBin = require('ffmpeg-static')
+
+/*
+// Ffpmeg export example
+ffmpeg(exportPath)
+    .setFfmpegPath(ffmpegBin.path)
+    .videoCodec("libx264")
+    .format(<formatOption?>)
+    .inputFps(<fpsOption?>)
+    .outputFps(60)
+    .on("progress", (info) => {
+        // Notify user on progress of video export
+    })
+    .on("error", (error) => {
+        console.log(error)
+        // Notify user on error
+    })
+    .on("end", () => {
+        // Notify user about finished export
+    })
+    .save()
+*/
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
