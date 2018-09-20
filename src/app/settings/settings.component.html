@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Settings</h1>
 <mat-dialog-content>
   <mat-form-field>
-    <input matInput placeholder="Save Location" [(ngModel)]="settings.saveLocation">
+    <input matInput placeholder="Save Location" [(ngModel)]="settings.saveLocation" readonly>
   </mat-form-field>
   <button mat-raised-button (click)="browseSaveLocation()">Browse</button>
   <mat-form-field>
